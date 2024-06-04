@@ -20,6 +20,8 @@ src = globber.stdout().strip().split('\n')
 shared_module(meson.project_name(), src,
   dependencies: [
     dependency('hyprland'),
+    dependency('pixman-1'),
+    dependency('libdrm'),
   ],
   install: true,
 )
