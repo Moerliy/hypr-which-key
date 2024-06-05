@@ -19,9 +19,14 @@ src = globber.stdout().strip().split('\n')
 
 shared_module(meson.project_name(), src,
   dependencies: [
-    dependency('hyprland'),
+     dependency('hyprland'),
     dependency('pixman-1'),
     dependency('libdrm'),
+    dependency('pangocairo'),
+    dependency('libinput'),
+    dependency('libudev'),
+    dependency('wayland-server'),
+    dependency('xkbcommon'),
   ],
   install: true,
 )

@@ -13,9 +13,14 @@ add_library(hypr-which-key SHARED ${SRC})
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(deps REQUIRED IMPORTED_TARGET
-    hyprland
+hyprland
     libdrm
+    libinput
+    libudev
+    pangocairo
     pixman-1
+    wayland-server
+    xkbcommon
 )
 target_link_libraries(hypr-which-key PRIVATE rt PkgConfig::deps)
 
