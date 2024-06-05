@@ -38,7 +38,7 @@
         hyprlandPkg = hyprland.packages.${system}.hyprland;
       in
         pkgs.gcc13Stdenv.mkDerivation {
-          pname = "Hypr-Which-Key";
+          pname = "hypr-which-key";
           inherit version;
           src = ./.;
 
@@ -52,7 +52,7 @@
             platforms = platforms.linux;
           };
         };
-      default = self.packages.${system}.Hypr-Which-Key;
+      default = self.packages.${system}.hypr-which-key;
     });
 
     # The default environment for 'nix develop'
@@ -62,12 +62,12 @@
           meson setup build --reconfigure
           sed -e 's/c++23/c++2b/g' ./build/compile_commands.json > ./compile_commands.json
         '';
-        name = "Hypr-Which-Key-shell";
+        name = "hypr-which-key-shell";
         nativeBuildInputs = with pkgs; [gcc13];
         buildInputs = [hyprland.packages.${system}.hyprland];
         inputsFrom = [
           hyprland.packages.${system}.hyprland
-          self.packages.${system}.Hypr-Which-Key
+          self.packages.${system}.hypr-which-key
         ];
       };
     });

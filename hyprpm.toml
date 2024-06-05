@@ -1,6 +1,6 @@
 [repository]
 authors = ["Moritz Gleissner", "Yusuf Duran"]
-name = "Hypr-Which-Key"
+name = "hypr-which-key"
 commit_pins = [
   [
     "cba1ade848feac44b2eda677503900639581c3f4",
@@ -11,5 +11,5 @@ commit_pins = [
 [Hypr-Which-Key]
 authors = ["Moritz Gleissner", "Yusuf Duran"]
 description = "Which Key for hyprland"
-output = "Hypr-Which-Key.so"
+output = "hypr-which-key.so"
 build = ["make all"]

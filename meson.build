@@ -1,4 +1,4 @@
-project('Hypr-Which-Key', 'cpp',
+project('hypr-which-key', 'cpp',
   version: '0.1',
   default_options: ['buildtype=release'],
 )
