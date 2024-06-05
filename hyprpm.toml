@@ -11,5 +11,5 @@ commit_pins = [
 [hypr-which-key]
 authors = ["Moritz Gleissner", "Yusuf Duran"]
 description = "Which Key for hyprland"
-output = "hypr-which-key.so"
-build = ["make all"]
+output = "hypr-which-key/hypr-which-key.so"
+build = ["make -C hypr-which-key all"]
