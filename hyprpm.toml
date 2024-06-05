@@ -4,11 +4,11 @@ name = "Hypr-Which-Key"
 commit_pins = [
   [
     "e93fbd7c4f991cb8ef03e433ccc4d43587923e15",
-    "42394fe9860c93957ceea1e9668acfa08a15bcd1",
+    "4b3e762e60a4a75ee0db3bd4b83f19a5ef0683d7",
   ],
   [
     "fe7b748eb668136dd0558b7c8279bfcd7ab4d759",
-    "42394fe9860c93957ceea1e9668acfa08a15bcd1",
+    "4b3e762e60a4a75ee0db3bd4b83f19a5ef0683d7",
   ],
 ]
 
