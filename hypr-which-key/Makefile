@@ -1,4 +1,4 @@
-CXXFLAGS=-shared -fPIC --no-gnu-unique -DWLR_USE_UNSTABLE -Wall -g -std=c++2b -O2
+CXXFLAGS=-shared -fPIC --no-gnu-unique -Wall -g -std=c++2b -O2
 INCLUDES = `pkg-config --cflags pixman-1 libdrm hyprland pangocairo libinput libudev wayland-server xkbcommon`
 SRC = $(wildcard src/*.cpp)
 TARGET = hypr-which-key.so
