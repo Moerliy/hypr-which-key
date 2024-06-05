@@ -38,7 +38,7 @@
       hyprland-plugins = final: prev: let
         inherit (final) callPackage;
       in {
-        hypr-whcih-key = callPackage ./hypr-which-key.nix {};
+        hypr-which-key = callPackage ./hypr-which-key.nix {};
       };
     };
 
