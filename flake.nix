@@ -1,77 +1,64 @@
 {
   description = "hypr-which-key";
 
-  inputs.hyprland.url = "github:hyprwm/Hyprland";
+  inputs = {
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    systems.follows = "hyprland/systems";
+  };
 
   outputs = {
     self,
     hyprland,
+    systems,
+    ...
   }: let
     inherit (hyprland.inputs) nixpkgs;
     inherit (nixpkgs) lib;
+    eachSystem = lib.genAttrs (import systems);
 
-    # System types to support.
-    supportedSystems = ["x86_64-linux" "aarch64-linux"];
-    perSystem = attrs:
-      lib.genAttrs supportedSystems (system: let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-        attrs system pkgs);
-
-    # Generate version
-    inherit (builtins) elemAt head readFile split substring;
-    mkDate = longDate: (lib.concatStringsSep "-" [
-      (substring 0 4 longDate)
-      (substring 4 2 longDate)
-      (substring 6 2 longDate)
-    ]);
-    version =
-      (head (split "'"
-        (elemAt
-          (split " version: '" (readFile ./meson.build))
-          2)))
-      + "+date=${mkDate (self.lastModifiedDate or "19700101")}_${self.shortRev or "dirty"}";
-  in {
-    # Provide some binary packages for selected system types
-    packages = perSystem (system: pkgs: {
-      hypr-which-key = let
-        hyprlandPkg = hyprland.packages.${system}.hyprland;
-      in
-        pkgs.gcc13Stdenv.mkDerivation {
-          pname = "hypr-which-key";
-          inherit version;
-          src = ./.;
-
-          inherit (hyprlandPkg) nativeBuildInputs;
-          buildInputs = [hyprlandPkg] ++ hyprlandPkg.buildInputs;
-
-          meta = with lib; {
-            homepage = "https://github.com/Moerliy/hypr-which-key";
-            description = "Which Key for Hyprland";
-            license = licenses.mit;
-            platforms = platforms.linux;
-          };
-        };
-      default = self.packages.${system}.hypr-which-key;
-    });
-
-    # The default environment for 'nix develop'
-    devShells = perSystem (system: pkgs: {
-      default = pkgs.mkShell {
-        shellHook = ''
-          meson setup build --reconfigure
-          sed -e 's/c++23/c++2b/g' ./build/compile_commands.json > ./compile_commands.json
-        '';
-        name = "hypr-which-key-shell";
-        nativeBuildInputs = with pkgs; [gcc13];
-        buildInputs = [hyprland.packages.${system}.hyprland];
-        inputsFrom = [
-          hyprland.packages.${system}.hyprland
-          self.packages.${system}.hypr-which-key
+    pkgsFor = eachSystem (system:
+      import nixpkgs {
+        localSystem.system = system;
+        overlays = [
+          self.overlays.hyprland-plugins
+          hyprland.overlays.hyprland-packages
         ];
-      };
+      });
+  in {
+    packages = eachSystem (system: {
+      inherit
+        (pkgsFor.${system})
+        hypr-which-key
+        ;
     });
 
+    overlays = {
+      default = self.overlays.hyprland-plugins;
+
+      hyprland-plugins = final: prev: let
+        inherit (final) callPackage;
+      in {
+        hypr-whcih-key = callPackage ./hypr-which-key.nix {};
+      };
+    };
+
+    checks = eachSystem (system: self.packages.${system});
+
+    devShells = eachSystem (system:
+      with pkgsFor.${system}; {
+        default = mkShell.override {stdenv = gcc13Stdenv;} {
+          shellHook = ''
+            meson setup build --reconfigure
+            sed -e 's/c++23/c++2b/g' ./build/compile_commands.json > ./compile_commands.json
+          '';
+          name = "hypr-which-key";
+          buildInputs = [hyprland.packages.${system}.hyprland];
+          inputsFrom = [
+            hyprland.packages.${system}.hyprland
+            self.packages.${system}.hypr-which-key
+          ];
+        };
+      });
     formatter = perSystem (_: pkgs: pkgs.alejandra);
   };
 }
