@@ -1,5 +1,5 @@
 {
-  description = "Hypr-Which-Key";
+  description = "hypr-which-key";
 
   inputs.hyprland.url = "github:hyprwm/Hyprland";
 
@@ -34,7 +34,7 @@
   in {
     # Provide some binary packages for selected system types
     packages = perSystem (system: pkgs: {
-      Hypr-Which-Key = let
+      hypr-which-key = let
         hyprlandPkg = hyprland.packages.${system}.hyprland;
       in
         pkgs.gcc13Stdenv.mkDerivation {

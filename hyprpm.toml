@@ -8,7 +8,7 @@ commit_pins = [
   ],
 ]
 
-[Hypr-Which-Key]
+[hypr-which-key]
 authors = ["Moritz Gleissner", "Yusuf Duran"]
 description = "Which Key for hyprland"
 output = "hypr-which-key.so"
