@@ -3,11 +3,7 @@ authors = ["Moritz Gleissner", "Yusuf Duran"]
 name = "Hypr-Which-Key"
 commit_pins = [
   [
-    "e93fbd7c4f991cb8ef03e433ccc4d43587923e15",
-    "4b3e762e60a4a75ee0db3bd4b83f19a5ef0683d7",
-  ],
-  [
-    "fe7b748eb668136dd0558b7c8279bfcd7ab4d759",
+    "cba1ade848feac44b2eda677503900639581c3f4",
     "4b3e762e60a4a75ee0db3bd4b83f19a5ef0683d7",
   ],
 ]
