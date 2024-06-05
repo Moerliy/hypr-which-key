@@ -59,6 +59,5 @@
           ];
         };
       });
-    formatter = perSystem (_: pkgs: pkgs.alejandra);
   };
 }
