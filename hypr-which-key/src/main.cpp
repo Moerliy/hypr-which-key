@@ -1,3 +1,4 @@
+#include <cstdio>
 #define WLR_USE_UNSTABLE
 
 #include <hyprland/src/plugins/PluginAPI.hpp>
@@ -16,7 +17,7 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
         throw std::runtime_error("[hypr-which-key] Version mismatch");
     }
 
-    // ...
+    std::printf("[hypr-which-key] plugin now loaded");
 
     return {"hypr-which-key", "An amazing plugin that is going to change the world!", "Moritz Gleissner, Yusuf Duran", "0.1"};
 }
