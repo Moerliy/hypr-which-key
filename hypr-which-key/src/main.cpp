@@ -17,7 +17,8 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
         throw std::runtime_error("[hypr-which-key] Version mismatch");
     }
 
-    std::printf("[hypr-which-key] plugin now loaded");
+    // std::printf("[hypr-which-key] plugin now loaded");
+    HyprlandAPI::addNotification(PHANDLE, "[hypr-which-key] Plugin loaded.", CColor{0.0, 1.0, 0.2, 1.0}, 5000);
 
     return {"hypr-which-key", "An amazing plugin that is going to change the world!", "Moritz Gleissner, Yusuf Duran", "0.1"};
 }
