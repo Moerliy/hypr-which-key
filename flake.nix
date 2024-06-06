@@ -56,11 +56,7 @@
         };
         programs.hyprland = {
           enable = true; 
-          package = {
-            hyprland.override = {
-              debug = true;
-            };
-          };
+          package = (hyprland.packages.${system}.hyprland.override { debug = true; });
         };
       });
   };
