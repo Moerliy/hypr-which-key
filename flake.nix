@@ -54,6 +54,14 @@
             # self.packages.${system}.hypr-which-key
           ];
         };
+        programs.hyprland = {
+          enable = true; 
+          package = {
+            hyprland.override = {
+              debug = true;
+            };
+          };
+        };
       });
   };
 }
