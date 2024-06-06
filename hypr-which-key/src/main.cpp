@@ -1,6 +1,11 @@
 #define WLR_USE_UNSTABLE
 
+#include <string>
+#include <sstream>
+#include <optional>
+
 #include <hyprland/src/plugins/PluginAPI.hpp>
+#include <hyprland/src/managers/KeybindManager.hpp>
 
 #include "globals.hpp"
 
@@ -20,6 +25,13 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
         HyprlandAPI::addNotification(PHANDLE, "[hypr-which-key] Mismatched headers! Can't proceed.", CColor{1.0, 0.2, 0.2, 1.0}, 5000);
         throw std::runtime_error("[hypr-which-key] Version mismatch");
     }
+
+    std::ostringstream printStr;
+    for (const auto& bind : g_pKeybindManager->m_lKeybinds) {
+        printStr << "submap: '" << bind.submap << "' on key: '" << bind.key << "'\n";
+    }
+
+    // throw std::runtime_error(printStr.str());
 
     HyprlandAPI::addNotification(PHANDLE, "[hypr-which-key] Initialized successfully!", CColor{0.2, 1.0, 0.2, 1.0}, 5000);
 
