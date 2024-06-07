@@ -1,8 +1,8 @@
+#include "src/render/OpenGL.hpp"
 #define WLR_USE_UNSTABLE
 
 #include <string>
 #include <sstream>
-#include <optional>
 
 #include <hyprland/src/plugins/PluginAPI.hpp>
 #include <hyprland/src/managers/KeybindManager.hpp>
