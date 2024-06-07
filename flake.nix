@@ -2,7 +2,7 @@
   description = "hypr-which-key";
 
   inputs = {
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland.url = "git+https://github.com/Moerliy/Hyprland?submodules=1";
     systems.follows = "hyprland/systems";
   };
 
